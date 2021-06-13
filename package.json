@@ -1,5 +1,5 @@
 {
-    "name": "mmap-io",
+    "name": "@lfdoherty/mmap-io",
     "version": "1.1.7",
     "license": "MIT",
     "author": {
