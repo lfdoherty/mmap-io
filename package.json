@@ -51,12 +51,12 @@
     },
     "devDependencies": {
         "@types/node": "^11.10.5",
-        "typescript": "^3.5.3",
-        "livescript": "^1.6.0"
+        "livescript": "^1.6.0",
+        "typescript": "^3.5.3"
     },
     "dependencies": {
-        "errno": "*",
         "bindings": "^1.5.0",
+        "errno": "*",
         "nan": "^2.14.0"
     }
 }

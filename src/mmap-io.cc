@@ -117,11 +117,11 @@ JS_FN(mmap_map) {
     // Offset and advise are optional
 
     constexpr void* hinted_address  = nullptr;  // Just making things uber-clear...
-    const size_t    size            = static_cast<size_t>(get_v<int>(info[0]));
+    const size_t    size            = static_cast<size_t>(get_v<off_t>(info[0]));
     const int       protection      = get_v<int>(info[1]);
     const int       flags           = get_v<int>(info[2]);
     const int       fd              = get_v<int>(info[3]);
-    const size_t    offset          = static_cast<size_t>(get_v<int>(info[4], 0));
+    const off_t    offset          = static_cast<size_t>(get_v<off_t>(info[4], 0));
     const int       advise          = get_v<int>(info[5], 0);
 
     char* data = static_cast<char*>( mmap( hinted_address, size, protection, flags, fd, offset) );
@@ -281,8 +281,8 @@ JS_FN(mmap_sync_lib_private_) {
     Local<Object>   buf             = get_obj(info[0]); // info[0]->ToObject(); // get_v<Local<Object>>(info[0]);
     char*           data            = node::Buffer::Data(buf);
 
-    int             offset          = get_v<int>(info[1], 0);
-    size_t          length          = get_v<int>(info[2], 0);
+    off_t           offset          = get_v<off_t>(info[1], 0);
+    size_t          length          = get_v<off_t>(info[2], 0);
     bool            blocking_sync   = get_v<bool>(info[3], false);
     bool            invalidate      = get_v<bool>(info[4], false);
     int             flags           = ( (blocking_sync ? MS_SYNC : MS_ASYNC) | (invalidate ? MS_INVALIDATE : 0) );
@@ -373,4 +373,4 @@ NAN_MODULE_INIT(Init) {
 
 }
 
-NAN_MODULE_WORKER_ENABLED(mmap_io, Init);
+NODE_MODULE(mmap_io, Init)
